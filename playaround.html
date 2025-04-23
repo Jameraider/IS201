@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatic Meal Planner with Macros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .meals, .macros {
+      margin-top: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: left;
+    }
+
+    .meal {
+      margin-bottom: 15px;
+    }
+
+    .macros div {
+      margin: 5px 0;
+    }
+
+    a.back-link {
+      margin-top: 40px;
+      display: inline-block;
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Automatic Meal Planner</h1>
+  <button onclick="generateMeals()">Generate Meals</button>
+
+  <div class="meals" id="mealDisplay">
+    <div class="meal"><strong>Breakfast:</strong> -</div>
+    <div class="meal"><strong>Lunch:</strong> -</div>
+    <div class="meal"><strong>Dinner:</strong> -</div>
+  </div>
+
+  <div class="macros" id="macroDisplay">
+    <h3>Daily Macros</h3>
+    <div>Carbs: 0g</div>
+    <div>Protein: 0g</div>
+    <div>Fats: 0g</div>
+  </div>
+
+  <a href="./scratch.html" class="back-link">← Back to Scratch Page</a>
+
+  <script>
+    const breakfasts = [
+      { name: "Oatmeal with fruits", carbs: 40, protein: 6, fats: 5 },
+      { name: "Avocado toast", carbs: 30, protein: 5, fats: 10 },
+      { name: "Smoothie bowl", carbs: 35, protein: 8, fats: 7 },
+      { name: "Pancakes", carbs: 45, protein: 6, fats: 8 },
+      { name: "Greek yogurt with honey", carbs: 20, protein: 15, fats: 5 }
+    ];
+
+    const lunches = [
+      { name: "Grilled chicken salad", carbs: 15, protein: 30, fats: 12 },
+      { name: "Turkey sandwich", carbs: 35, protein: 25, fats: 10 },
+      { name: "Veggie wrap", carbs: 40, protein: 10, fats: 9 },
+      { name: "Sushi rolls", carbs: 45, protein: 20, fats: 8 },
+      { name: "Pasta primavera", carbs: 50, protein: 12, fats: 10 }
+    ];
+
+    const dinners = [
+      { name: "Stir-fried tofu and rice", carbs: 50, protein: 18, fats: 14 },
+      { name: "Baked salmon with veggies", carbs: 20, protein: 28, fats: 18 },
+      { name: "Chicken curry", carbs: 30, protein: 25, fats: 15 },
+      { name: "Spaghetti Bolognese", carbs: 55, protein: 20, fats: 12 },
+      { name: "Beef tacos", carbs: 35, protein: 22, fats: 16 }
+    ];
+
+    function getRandomMeal(meals) {
+      return meals[Math.floor(Math.random() * meals.length)];
+    }
+
+    function generateMeals() {
+      const breakfast = getRandomMeal(breakfasts);
+      const lunch = getRandomMeal(lunches);
+      const dinner = getRandomMeal(dinners);
+
+      document.getElementById("mealDisplay").innerHTML = `
+        <div class="meal"><strong>Breakfast:</strong> ${breakfast.name}</div>
+        <div class="meal"><strong>Lunch:</strong> ${lunch.name}</div>
+        <div class="meal"><strong>Dinner:</strong> ${dinner.name}</div>
+      `;
+
+      const totalCarbs = breakfast.carbs + lunch.carbs + dinner.carbs;
+      const totalProtein = breakfast.protein + lunch.protein + dinner.protein;
+      const totalFats = breakfast.fats + lunch.fats + dinner.fats;
+
+      document.getElementById("macroDisplay").innerHTML = `
+        <h3>Daily Macros</h3>
+        <div>Carbs: ${totalCarbs}g</div>
+        <div>Protein: ${totalProtein}g</div>
+        <div>Fats: ${totalFats}g</div>
+      `;
+    }
+  </script>
+</body>
+</html>
